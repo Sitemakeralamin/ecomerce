@@ -500,7 +500,7 @@ min-height:20px !important;
     @media only screen and (min-width:1600px){
         .header__menu--link{width:max-content;font-size:1.3rem !important;padding:16px 0}
         }
-    .menu__arrowdown--icon{margin-left:3px}.header__sub--menu{position:absolute;z-index:9;top:100%;left:0;visibility:hidden;width:220px;margin:0;margin-top:20px;padding:20px;list-style:none;-webkit-transition:var(--transition);transition:var(--transition);opacity:0;background-color:var(--white-color);-webkit-box-shadow:0 10px 20px rgba(0,0,0,.15);box-shadow:0 10px 20px rgba(0,0,0,.15);border-radius:10px}
+    .menu__arrowdown--icon{margin-left:3px}.header__sub--menu{position:absolute;z-index:9;top:100%;left:0;visibility:hidden;width:fit-content;margin:0;margin-top:20px;padding:20px;list-style:none;-webkit-transition:var(--transition);transition:var(--transition);opacity:0;background-color:var(--white-color);-webkit-box-shadow:0 10px 20px rgba(0,0,0,.15);box-shadow:0 10px 20px rgba(0,0,0,.15);border-radius:10px}
     .header__sub--menu__link{
         width: max-content;
         font-size:1.5rem;display:block;padding:10px 0;
