@@ -9,14 +9,14 @@ use Rakibhstu\Banglanumber\NumberToBangla;
 
 if (! function_exists('featured_categories')) {
     function featured_categories() {
-        $categories = Category::where(['is_menu_active'=>1, 'is_active'=>1])->orderBy('menu_position', 'ASC')->limit(8)->get();
+        $categories = Category::where(['is_menu_active'=>1, 'is_active'=>1])->orderBy('menu_position', 'ASC')->get();
         return $categories;
     }
 }
 
 if (! function_exists('all_cateegories')) {
     function all_cateegories() {
-        $all_categories = Category::orderBy('title', 'ASC')->get(['title', 'id']);
+        $all_categories = Category::orderBy('title', 'ASC')->get(['title', 'id'])->orderBy('menu_position', 'ASC');
         return $all_categories;
 
     }
