@@ -58,7 +58,7 @@
         ->select('product_id')
         ->get();
         $products = App\Models\Product::whereIn('id',$product_with_categories_ids)
-        ->limit(8)
+        ->limit(10)
         ->get();
     @endphp
     @if ($products->isNotEmpty())
