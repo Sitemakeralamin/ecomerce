@@ -427,7 +427,7 @@ class PageController extends Controller
     public function ajax_product_search(Request $request)
     {
         $input = $request->input;
-        $category_id = $request->category_id;
+        $category_id = $request->category_id??'all';
         $output = '';
         if($category_id == 'all') {
             $products = Product::where('title', 'LIKE', '%'. $input. '%')->orWhere('description', 'LIKE', '%'. $input. '%')->limit(10)->get(['id', 'title', 'bn_title', 'thumbnail_image']);

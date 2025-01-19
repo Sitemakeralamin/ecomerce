@@ -5,7 +5,32 @@ $featured_categories = featured_categories();
     .auth_user_icon {
     padding: 0px 5px 0px 10px;
     margin: 0px 5px 0px 5px;
-}
+    }
+
+    .search-bar {
+        flex: 1;
+        margin: 0 20px;
+        position: relative;
+    }
+    .search-bar input {
+        width: 100%;
+        padding: 8px 15px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+    }
+    .search-bar button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border: none;
+        color: var(--logo-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
 </style>
 <header class="header__section"> {{-- Start Topbar --}}
     <div class="header__topbar d-sm-2-none">
@@ -67,25 +92,15 @@ $featured_categories = featured_categories();
                 </div>
                 <div class="header__search--widget d-none d-lg-block">
                     <form class="d-flex header__search--form" action="#">
-                        <div class="header__select--categories select">
-                            <select class="header__select--inner" id="d1_product_search_category">
-                                <option selected value="all">{{ __('messages.All Categories') }}</option>
-                                @if(count($featured_categories) > 0)
-                                @foreach($featured_categories as $categories)
-                                    <option value="{{$categories->id}}">
-                                        {{ __translate($categories->title, $categories->bn_title) }}
-                                    </option>
-                                @endforeach
-                                @endif
-                            </select>
-                        </div>
                         <div class="header__search--box">
-                            <label>
-                                <input class="header__search--input" id="d1_product_search" oninput="search_product('d1')" placeholder="{{ __('messages.Search here') }}..." type="text">
-                            </label>
-                            <button class="header__search--button text-white" type="submit" aria-label="search button">
-                                <svg class="header__search--button__svg" xmlns="http://www.w3.org/2000/svg" width="27.51" height="26.443" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path></svg>
-                            </button>
+                            <div class="search-bar">
+                                <label>
+                                    <input type="text" placeholder="Search" id="d1_product_search" oninput="search_product('d1')" >
+                                </label>
+                                <button type="submit" aria-label="search button">
+                                    <svg class="" xmlns="http://www.w3.org/2000/svg" width="27.51" height="26.443" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path></svg>
+                                </button>
+                            </div>
                             <div class="search_product_output mt-2" id="search_product_output_d1_main" style="display:none">
                                 <div class="row" id="search_product_output_d1">
 
@@ -171,7 +186,7 @@ $featured_categories = featured_categories();
                             @else
                             <li class="header__menu--items style2">
                                 <a class="header__menu--link sticky_menu_link" href="{{ route('products', ['category_id'=>$category->id]) }}">
-                                    {{ __translate($categories->title, $categories->bn_title) }}
+                                    {{ __translate($category->title, $category->bn_title) }}
                                 </a>
                             </li>
                             @endif
