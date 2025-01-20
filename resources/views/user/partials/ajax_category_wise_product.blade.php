@@ -78,8 +78,17 @@
 
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <a class="" href="{{route('products', ['category_id'=>$category->id])}}">
-                                        <img class="cat-image" style="border-radius:10px;" src="{{ asset('images/category/'.$category->banner ) }}" alt="{{ $category->title }}">
+                                        <a 
+                                        class="" 
+                                        style="" 
+                                        href="{{route('products', ['category_id'=>$category->id])}}">
+                                        <img 
+                                        class="" 
+                                        style="
+                                        border-radius:10px;
+                                        
+                                        " 
+                                        src="{{ asset('images/category/'.$category->banner ) }}" alt="{{ $category->title }}">
                                         </a>
                                     </div>
                                     <div class="col-md-8">
