@@ -77,7 +77,7 @@
                             <div class="product__section--inner">
 
                                 <div class="row">
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <a 
                                         class="" 
                                         style="" 
@@ -86,22 +86,11 @@
                                         class="" 
                                         style="
                                         border-radius:10px;
-                                        
                                         " 
                                         src="{{ asset('images/category/'.$category->banner ) }}" alt="{{ $category->title }}">
                                         </a>
                                     </div>
-                                    <div class="col-md-8">
-                                        {{-- category Name --}}
-                                        <div class="row text-dark mb-3 shadow category-wise-product-header" 
-                                             style="background-color: var(--logo-color); border-radius:5px;">
-                                             <div class="col-6">
-                                                 <h2>{{ $category->title }}</h2>
-                                             </div>
-                                             <div class="col-6">
-                                                    <a class="category-wise-product-shop-more" href="{{route('products', ['category_id'=>$category->id])}}">Shop More</a>
-                                             </div>
-                                        </div>
+                                    <div class="col-md-12">
                                         <div class="category-wise-product-grid">
                                             @foreach($products as $product)
                                                 <div class="category-wise-product-grid-item">

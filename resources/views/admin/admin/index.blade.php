@@ -39,11 +39,11 @@
                   <td><img src="{{ asset('images/admin/' . $admin->image) }}" class="rounded-pill shadow p-2" width="100px"></td>
                   <td>
                     {{-- <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-primary" title="Edit"><i class="fas fa-edit"></i></a> --}}
-                    <a href="#deleteModal{{ $admin->id }}" class="btn btn-danger" data-toggle="modal" title="Delete"><i class="fas fa-trash"></i></a>
+                    {{-- <a href="#deleteModal{{ $admin->id }}" class="btn btn-danger" data-toggle="modal" title="Delete"><i class="fas fa-trash"></i></a> --}}
                   </td>
               </tr>
             <!-- admin Modal -->
-                <div class="modal fade" id="deleteModal{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               {{--  <div class="modal fade" id="deleteModal{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             @endforeach
           </tbody>
