@@ -484,7 +484,6 @@ class PageController extends Controller
 
     public function ajax_category_wise_product() {
         $product_with_categories = ProductWithCategory::groupBy('category_id')
-        ->whereIn('category_id', [7,15,16,25])
         ->select('category_id')
         ->get();
         

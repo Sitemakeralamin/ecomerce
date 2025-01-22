@@ -12,28 +12,28 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category:: class);
+        return $this->belongsTo(Category::class);
     }
 
     public function brand()
     {
-        return $this->belongsTo(Brand:: class);
+        return $this->belongsTo(Brand::class);
     }
 
     // public function variation()
     // {
-    //     return $this->hasMany(ProductVariation:: class);
+    //     return $this->hasMany(ProductVariation::class);
     // }
 
 
     public function product_image()
     {
-        return $this->hasMany(ProductImage:: class);
+        return $this->hasMany(ProductImage::class);
     }
 
     public function product_category()
     {
-        return $this->hasMany(ProductWithCategory:: class, 'product_id', 'id');
+        return $this->hasMany(ProductWithCategory::class, 'product_id', 'id');
     }
 
     
@@ -44,7 +44,7 @@ class Product extends Model
     
     public function single_stock()
     {
-        return $this->belongsTo(ProductStocks:: class, 'id', 'product_id')->where('variant', '=', null)->where('color', '=', null);
+        return $this->belongsTo(ProductStocks::class, 'id', 'product_id')->where('variant', '=', null)->where('color', '=', null);
     }
 
 

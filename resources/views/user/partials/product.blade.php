@@ -29,7 +29,8 @@
 <div class="col mb-30 py-3 rounded product_col">
     <div class="product__items" style="">
         <div class="product__items--thumbnail">
-            <a class="product__items--link" href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
+            <a class="product__items--link" 
+                href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
                 <img class="product__items--img product__primary--img product_img border-radius-10" src="{{ asset('images/product/'.$product->thumbnail_image) }}" alt="{{$product->title}}">
             </a>
             <div class="product__badge">

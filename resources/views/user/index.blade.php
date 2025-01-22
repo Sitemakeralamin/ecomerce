@@ -69,7 +69,9 @@
 </div>
 {{-- <div id="best_selling_products"></div> --}}
 {{-- featured brands section --}}
-
+<!-- Start testimonial section -->
+@include('user.inc.testimonial')
+<!-- End testimonial section -->
 @if(count($blogs) > 0)
 <section class="blog__section d-none section--padding pt-0">
     <div class="container-fluid">

@@ -1,111 +1,46 @@
- <style>
-    .category-wise-product-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .category-wise-product-header h2 {
-      font-size: 24px;
-      color: white; /* Purple */
-    }
-
-    .category-wise-product-shop-more {
-      float:right;
-      text-decoration: none;
-      font-size: 16px;
-      color: white;
-      background-color: var(--logo-color); /* Purple */
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .category-wise-product-shop-more:hover {
-      background-color: var(--logo-color);
-    }
-
-    .category-wise-product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-    }
-
-    .category-wise-product-grid-item {
-      text-align: center;
-      background-color: white;
-      border: 2px solid var(--logo-color);
-      border-radius: 8px;
-      overflow: hidden;
-      padding: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .category-wise-product-grid-item img {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-  </style>
-
 @if ($product_with_categories->isNotEmpty())
     @foreach($product_with_categories as $pwc)
-    @php
-    $product_with_categories_ids = App\Models\ProductWithCategory::where('category_id',$pwc->category_id)
-        ->select('product_id')
-        ->get();
-        $products = App\Models\Product::whereIn('id',$product_with_categories_ids)
-        ->limit(10)
-        ->get();
-    @endphp
-    @if ($products->isNotEmpty())
-    @php
-        $category = App\Models\Category::where([
-            'id'=>$pwc->category_id,
-            'parent_id'=>0,
-            'is_featured'=>1,
-            'is_active'=>1,
-            ])->first();
-    @endphp
-    @if ($category)
-            
-                <section class="product__section section--padding pt-0" style="padding-bottom: 5rem !important;">
-                    <div class="container-fluid">                        
-                            <div class="product__section--inner">
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <a 
-                                        class="" 
-                                        style="" 
-                                        href="{{route('products', ['category_id'=>$category->id])}}">
-                                        <img 
-                                        class="" 
-                                        style="
-                                        border-radius:10px;
-                                        " 
-                                        src="{{ asset('images/category/'.$category->banner ) }}" alt="{{ $category->title }}">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="category-wise-product-grid">
-                                            @foreach($products as $product)
-                                                <div class="category-wise-product-grid-item">
-                                                    @include('user.partials.category_wise_product')
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        @endif    
-                    
-                    </div>
-                </section>
-    @endif
+      @php
+      $product_with_categories_ids = App\Models\ProductWithCategory::where('category_id',$pwc->category_id)
+          ->select('product_id')
+          ->get();
+          $products = App\Models\Product::whereIn('id',$product_with_categories_ids)
+          ->limit(10)
+          ->get();
+      @endphp
+      @if ($products->isNotEmpty())
+        @php
+            $category = App\Models\Category::where([
+                'id'=>$pwc->category_id,
+                'parent_id'=>0,
+                'is_featured'=>1,
+                'is_active'=>1,
+                ])->first();
+        @endphp
+        @if ($category)           
+            <section class="product__section section--padding pt-0" style="padding-bottom: 5rem !important;">
+                <div class="container-fluid">                        
+                  <div class="product__section--inner">
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                              <a class="" style="" 
+                              href="{{route('products', ['category_id'=>$category->id])}}">
+                              <img class="" style="border-radius:10px; width:100%;" 
+                              src="{{ asset('images/category/'.$category->banner ) }}" alt="{{ $category->title }}">
+                              </a>
+                        </div>
+                      </div>
+                      <div class="product__section--inner">
+                        <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-2 mb--n30">
+                            @foreach($products as $index => $product)
+                                    @include('user.partials.category_wise_product')
+                            @endforeach
+                        </div>  
+                      </div>
+                  </div>  
+                </div>
+            </section>
+        @endif
+      @endif
     @endforeach
 @endif
