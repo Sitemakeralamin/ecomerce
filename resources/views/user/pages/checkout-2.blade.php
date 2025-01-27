@@ -53,7 +53,7 @@
     <div class="container">
             <div class="row mb-9">
                  {{-- Billing Info --}}
-                 <div class="col-lg-8 pr-lg-4 mb-4 p-3 shadow rounded">
+                 <div class="col-lg-8 pr-lg-4 mb-4 p-5 shadow rounded">
                     <form class="form checkout-form p-3" action="{{ route('order.create') }}" method="post">
                         @csrf
                         @if(!Auth::check())
@@ -199,7 +199,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-4 pr-lg-4 mb-4 p-3 shadow rounded">
+                <div class="col-lg-4 pr-lg-4 mb-4 p-5 shadow rounded">
                     <div class="cart__summary--total mb-10">
                         <table class="cart__summary--total__table">
                             <tbody>
@@ -237,7 +237,7 @@
                     </form>
                 </div>
                 {{-- Cart --}}
-                <div class="col-lg-12 mb-4 sticky-sidebar-wrapper p-3">
+                <div class="col-lg-12 mb-4 sticky-sidebar-wrapper p-5">
                     <div class="order-summary-wrapper sticky-sidebar shadow rounded p-3">
                         <div class="order-summary">
                             <div class="cart__table checkout__product--table">
