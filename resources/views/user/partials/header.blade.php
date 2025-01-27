@@ -230,34 +230,61 @@ color:black !important;
 
                             @foreach($featured_categories as $category)
                             @if(count($category->menu_child) > 0)
-                            <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{route('products', ['category_id'=>$category->id])}}"> 
-                                    {{ __translate($category->title, $category->bn_title) }}
-                                    <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" viewBox="0 0 12 7.41">
-                                        <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"></path>
-                                    </svg>
-                                </a>
-                                <ul class="header__sub--menu">
-                                    @foreach($category->menu_child as $p_category)
-                                    <li class="header__sub--menu__items"><a href="{{route('products', ['category_id'=>$p_category->id])}}" class="header__sub--menu__link">
-                                        {{ __translate($p_category->title, $p_category->bn_title) }}
-                                    </a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link" href="{{route('products', ['category_id'=>$category->id])}}"> 
+                                        {{ __translate($category->title, $category->bn_title) }}
+                                        <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" viewBox="0 0 12 7.41">
+                                            <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"></path>
+                                        </svg>
+                                    </a>
+                                    <ul class="header__sub--menu">
+                                        @foreach($category->menu_child as $p_category)
+                                        <li class="header__sub--menu__items"><a href="{{route('products', ['category_id'=>$p_category->id])}}" class="header__sub--menu__link">
+                                            {{ __translate($p_category->title, $p_category->bn_title) }}
+                                        </a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
                             @else
-                            <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{route('products', ['category_id'=>$category->id])}}">
-                                    {{ __translate($category->title, $category->bn_title) }}
-                                </a>
-                            </li>
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link" href="{{route('products', ['category_id'=>$category->id])}}">
+                                        {{ __translate($category->title, $category->bn_title) }}
+                                    </a>
+                                </li>
                             @endif
                             @endforeach
 
                             @endif
+
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{route('products')}}">
+                                    {{ __('messages.Shop') }}
+                                </a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{route('about')}}">
+                                    {{ __('messages.About Us') }}
+                                </a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{route('user.blog')}}">
+                                    {{ __('messages.Blog') }}
+                                </a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{route('contact')}}">
+                                    {{ __('messages.Contact Us') }}
+                                </a>
+                            </li>
+
                         </ul>
                     </nav>
+
                 </div>
+                <p class="header__discount--text"><img class="header__discount--icon__img" 
+                    src="{{ asset('assets/img/icon/lamp.png') }}" alt="lamp-img">
+                    High Quality Imported Products
+                </p>
             </div>
         </div>
     </div>

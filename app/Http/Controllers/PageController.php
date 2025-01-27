@@ -68,7 +68,7 @@ class PageController extends Controller
         $featured_categories = Category::where('is_featured', 1)->orderBy('position', 'ASC')->get(['id', 'title', 'bn_title', 'image']);
 
         
-        $blogs = Blog::orderBy('id', 'DESC')->limit(4)->get(['id', 'title', 'bn_title', 'image', 'created_at']);
+        $blogs = Blog::orderBy('id', 'DESC')->get(['id', 'title', 'bn_title', 'image', 'created_at']);
         return view('user.index', compact('featured_categories', 'sliders','sliderSideBanner','blogs'));
 
     }

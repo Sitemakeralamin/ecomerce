@@ -19,6 +19,7 @@ return [
     'Checkout'=>'চেকআউট',
     'Track order' => 'অর্ডার ট্র্যাক করুন',
     'Contact Us' => 'যোগাযোগ করুন',
+    'Blog' => 'ব্লগ',
     'Privacy Policy' => 'গোপনীয়তা নীতি',
     'Reurn Refund Policy' => 'প্রত্যাশিত ফেরত নীতি',
     'Support Policy' => 'সমর্থন নীতি',

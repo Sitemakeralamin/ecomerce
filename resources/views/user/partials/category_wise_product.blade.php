@@ -25,13 +25,13 @@
     }
 
 @endphp
-
-<div class="col mb-30 py-3 rounded product_col">
+<div class="swiper-slide">
     <div class="product__items" style="">
         <div class="product__items--thumbnail">
             <a class="product__items--link" 
                 href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
-                <img class="product__items--img product__primary--img product_img border-radius-10" src="{{ asset('images/product/'.$product->thumbnail_image) }}" alt="{{$product->title}}">
+                <img class="product__items--img product__primary--img product_img border-radius-10" 
+                src="{{ asset('images/product/'.$product->thumbnail_image) }}" alt="{{$product->title}}">
             </a>
             <div class="product__badge">
                 <span class="product__badge--items sale">{{$sale_text}}</span>
@@ -39,9 +39,9 @@
         </div>
 
         <div class="product__items--content text-center">
-          
+            
             <h4 class="product__items--content__title">
-              <a href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
+                <a href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
                 {{ __translate(Str::limit($product->title,50), Str::limit($product->bn_title,50)) }}
             </a>
             </h4>
@@ -78,7 +78,7 @@
 
                             {{-- Add to cart --}}
                             <button class="product__items--action__btn add__to--cart bg-add-to-cart d-none" onclick="addToCart({{ $product->id }}, 'only', 'cart')" type="button" >
-                          {{ __('messages.Add To Cart') }}
+                            {{ __('messages.Add To Cart') }}
                             </button>
                             
                         @else

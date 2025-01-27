@@ -19,6 +19,7 @@ return [
     'Checkout'=>'Checkout',
     'Track order' => 'Track Your order',
     'Contact Us' => 'Contact Us',
+    'Blog' => 'Blog',
     'Privacy Policy' => 'Privacy Policy',
     'Reurn Refund Policy' => 'Reurn Refund Policy',
     'Support Policy' => 'Support Policy',
