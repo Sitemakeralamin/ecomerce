@@ -44,15 +44,15 @@ Route::get('/ajax_best_selling_products', [App\Http\Controllers\PageController::
 Route::get('/ajax_flash_sale_offer', [App\Http\Controllers\PageController::class, 'ajax_flash_sale_offer'])->name('ajax.flash.sale.offer');
 Route::get('/flash-sale-offer/{id}/{slug}', [App\Http\Controllers\PageController::class, 'ajax_flash_sale_offer_details'])->name('flash.sale.offer.details');
 
-
 Route::get('/shop', [App\Http\Controllers\PageController::class, 'products'])->name('products');
 Route::post('/shop_products_data', [App\Http\Controllers\PageController::class, 'shop_products_data'])->name('shop.products.data');
 
 Route::get('/shop/{slug}', [App\Http\Controllers\PageController::class, 'shop_products'])->name('products.individual.group');
 
-
 Route::get('/offer-products', [App\Http\Controllers\PageController::class, 'offer_products'])->name('offer.products');
+// Route::get('/product/{id}/{slug}', [App\Http\Controllers\PageController::class, 'single_product'])->name('single.product');
 Route::get('/product/{id}/{slug}', [App\Http\Controllers\PageController::class, 'single_product'])->name('single.product');
+
 Route::post('/product/variation_check', [App\Http\Controllers\PageController::class, 'product_variation_check'])->name('single.product.variation.check');
 Route::get('/product/ajax_load_cart_data', [App\Http\Controllers\CartController::class, 'ajax_load_cart_data'])->name('ajax.load.cart.data');
 

@@ -25,11 +25,13 @@
     }
 
 @endphp
-<div class="swiper-slide">
-    <div class="product__items" style="">
+<div class="swiper-slide border border-light m-1 shadow-sm pb-3">
+    {{-- $category->title --}}
+    <div class="product__items">
         <div class="product__items--thumbnail">
-            <a class="product__items--link" 
-                href="{{ route('single.product', [$product->id, Str::slug($product->title)]) }}">
+            <a class="product__items--link"
+                href="{{ route('single.product', [$category->title, $product->id, Str::slug($product->title)]) }}">
+                {{-- href="{{ route('single.product', [$category->title, $product->id]) }}"> --}}
                 <img class="product__items--img product__primary--img product_img border-radius-10" 
                 src="{{ asset('images/product/'.$product->thumbnail_image) }}" alt="{{$product->title}}">
             </a>

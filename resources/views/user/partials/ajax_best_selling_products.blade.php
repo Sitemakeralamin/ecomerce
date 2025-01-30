@@ -2,7 +2,7 @@
 <section class="product__section section--padding pt-0"  style="padding-bottom: 6rem !important;">
     <div class="container-fluid">
         <div class="section__heading mb-2 border-bottom d-flex">
-            <h2 class="section__heading-- style2 flex-grow-1">Best Selling Products</h2>
+            <h2 class="section__heading-- style2 flex-grow-1">Top Sell</h2>
             <div class="btn_custom mb-2">
                 <a class=" rounded shop_more_btn" href="{{route('products.individual.group', ['slug'=>'best-selling'])}}">Shop More
                     <svg class="primary__btn--arrow__icon" xmlns="http://www.w3.org/2000/svg" width="20.2" height="12.2" viewBox="0 0 6.2 6.2">

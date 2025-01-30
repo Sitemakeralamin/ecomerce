@@ -118,9 +118,7 @@ class PageController extends Controller
     }
 
     public function shop_products_data(Request $request) {
-        //return "hello";
-
-        $lastID = $request->lastID;
+        // $lastID = $request->lastID;
         $brand_array = $request->brand_array;
         $category_id = $request->category_id;
 
@@ -128,9 +126,16 @@ class PageController extends Controller
         $output = '';
 
         if(empty($category_id) && empty($brand_array)) {// nothing is active
-            $products = Product::where('is_active', 1)->where('id', '<', $lastID)->orderBy('id', 'DESC')->limit(20)->get(['id', 'discount_type', 'discount_amount', 'type', 'title', 'bn_title', 'thumbnail_image']);
-        }
-        else if(!empty($category_id) && empty($brand_info)) { //only category is active.
+            $query = Product::where('is_active', 1)->with('stock_product');
+                    if ($request->has('min_price') && $request->has('max_price') && $request->max_price != 0) {
+                        $query->whereHas('stock_product', function ($q) use ($request) {
+                            $q->whereBetween('price', [$request->min_price, $request->max_price]);
+                        });
+                    }
+            $products = $query->orderBy('id', 'DESC')->get(['id', 'discount_type', 'discount_amount', 'type', 'title', 'bn_title', 'thumbnail_image']);
+            
+        }else if(!empty($category_id) && empty($brand_info)) { //only category is active.
+            // return '2';
 
             $category_info = Category::find($category_id);
             $categories_id = array($category_id);
@@ -147,13 +152,20 @@ class PageController extends Controller
                 }
             }
 
-            $products = Product::join('product_with_categories', 'product_with_categories.product_id', '=', 'products.id')
-                    ->where('products.is_active', 1)
-                    ->whereIn('product_with_categories.category_id', $categories_id)->where('product_with_categories.id', '<', $lastID)->orderBy('product_with_categories.id', 'DESC')->limit(20)
-              		->get(['products.id', 'products.discount_type', 'products.discount_amount', 'products.type', 'products.title', 'products.thumbnail_image', 'product_with_categories.category_id', 'product_with_categories.product_id']);
+            $query = Product::join('product_with_categories', 'product_with_categories.product_id', '=', 'products.id')->with('stock_product'); 
 
-        }
-        else if(!empty($category_id) && !empty($brand_info)) { // category & brand both is active.
+                    if ($request->has('min_price') && $request->has('max_price') && $request->max_price != 0) {
+                        $query->whereHas('stock_product', function ($q) use ($request) {
+                            $q->whereBetween('price', [$request->min_price, $request->max_price]);
+                        });
+                    }
+            $products = $query->where('products.is_active', 1)
+                        ->whereIn('product_with_categories.category_id', $categories_id)
+                        ->orderBy('product_with_categories.id', 'DESC')
+                        ->get(['products.id', 'products.discount_type', 'products.discount_amount', 'products.type', 'products.title', 'products.thumbnail_image', 'product_with_categories.category_id', 'product_with_categories.product_id']);
+
+        }else if(!empty($category_id) && !empty($brand_info)) { // category & brand both is active.
+
             $category_info = Category::find($category_id);
             $categories_id = array($category_id);
             if(count($category_info->child) > 0) {
@@ -168,10 +180,23 @@ class PageController extends Controller
                     }
                 }
             }
-            $products = Product::where('is_active', 1)->whereIn('category_id', $categories_id)->whereIn('brand_id', [$brand_array])->where('id', '<', $lastID)->orderBy('id', 'DESC')->limit(20)->get();
-        }
-        else if(empty($category_id) && !empty($brand_array)) { //Brand is active.
-            $products = Product::where('is_active', 1)->whereIn('brand_id', [$brand_array])->where('id', '<', $lastID)->orderBy('id', 'DESC')->limit(20)->get();
+
+            $query = Product::where('is_active', 1)->with('stock_product');
+                    if ($request->has('min_price') && $request->has('max_price') && $request->max_price != 0) {
+                        $query->whereHas('stock_product', function ($q) use ($request) {
+                            $q->whereBetween('price', [$request->min_price, $request->max_price]);
+                        });
+                    }
+            $products = $query->whereIn('category_id', $categories_id)->whereIn('brand_id', [$brand_array])->orderBy('id', 'DESC')->limit(20)->get();
+            
+        }else if(empty($category_id) && !empty($brand_array)) { //Brand is active.
+            $query = Product::where('is_active', 1)->with('stock_product');
+            if ($request->has('min_price') && $request->has('max_price') && $request->max_price != 0) {
+                    $query->whereHas('stock_product', function ($q) use ($request) {
+                        $q->whereBetween('price', [$request->min_price, $request->max_price]);
+                    });
+            }
+            $products = $query->whereIn('brand_id', [$brand_array])->orderBy('id', 'DESC')->get();
         }
 
         if(count($products) > 0) {
@@ -223,7 +248,8 @@ class PageController extends Controller
         return view('pages.offer-products', compact('products', 'page'));
     }
 
-    public function single_product($id, $slug)
+    // public function single_product($id, $slug)
+    public function single_product($category = null, $id, $slug)
     {
         $product = Product::find($id);
         $categories =[];

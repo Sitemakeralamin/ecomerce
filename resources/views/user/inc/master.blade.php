@@ -77,6 +77,9 @@
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/toastify.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
   {{-- font-awesome --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   {!! optional($business)->google_tag_manager_head !!}
@@ -116,6 +119,7 @@
   <script src="{{ asset('frontend/assets/js/plugins/glightbox.min.js')}}"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
   <!-- Customscript js -->
   <script src="{{ asset('frontend/assets/js/script.js')}}"></script>

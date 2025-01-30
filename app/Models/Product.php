@@ -41,6 +41,10 @@ class Product extends Model
         return $this->hasMany(ProductStocks::class);
     }
 
+    public function stock_product() {
+        return $this->hasOne(ProductStocks::class);
+    }
+
     
     public function single_stock()
     {

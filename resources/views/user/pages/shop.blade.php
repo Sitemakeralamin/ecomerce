@@ -8,11 +8,13 @@
 <form action="javascript:void(0)" id="filter_form">
     @csrf
     <input type="hidden" id="brand_array" name="brand_array">
-    <input type="hidden" id="lastID" name="lastID" value="1200">
+    {{-- <input type="hidden" id="lastID" name="lastID" value="1200"> --}}
     <input type="hidden" id="is_discount" name="is_discount" value="0">
     <input type="hidden" id="new_arrival" name="new_arrival" value="0">
     <input type="hidden" id="category_id" name="category_id" value="{{!is_null($request_category)? $request_category : 0}}">
-    <input type="hidden" id="load_more" name="" value="0">
+    {{-- <input type="hidden" id="load_more" name="" value="0"> --}}
+    <input id="min_price" type="hidden" value="0" name="min_price" min="0">
+    <input id="max_price" type="hidden" value="0" name="max_price" min="0">
 </form>
 
     <div class="offcanvas__filter--sidebar widget__area">
@@ -112,6 +114,35 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4">
                     <div class="shop__sidebar--widget widget__area d-none d-lg-block" id="desktop_filter">
+                        <div class="single__widget price__filter widget__bg">
+                            <h2 class="widget__title h3">Filter By Price</h2>
+                            <form class="price__filter--form" action=""> 
+                                <div class="price__filter--form__inner mb-15 d-flex align-items-center">
+                                    <div class="price__filter--group">
+                                        <label class="price__filter--label" for="fromPrice">From</label>
+                                        <div class="price__filter--input border-radius-5 d-flex align-items-center">
+                                            <span class="price__filter--currency">৳</span>
+                                            <label>
+                                                <input class="price__filter--input__field border-0" id="fromPrice" type="number" value="" name="min_price" min="0">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="price__divider">
+                                        <span>-</span>
+                                    </div>
+                                    <div class="price__filter--group">
+                                        <label class="price__filter--label" for="toPrice">To</label>
+                                        <div class="price__filter--input border-radius-5 d-flex align-items-center">
+                                            <span class="price__filter--currency">৳</span>
+                                            <label>
+                                                <input class="price__filter--input__field border-0" id="toPrice" type="number" value="" name="max_price" min="0">
+                                            </label> 
+                                        </div>	
+                                    </div>
+                                </div>
+                                <button class="price__filter--btn primary__btn" type="button">Filter</button>
+                            </form>
+                        </div>
                         <div class="single__widget widget__bg">
                             <h2 class="widget__title h3">{{ __('messages.Categories') }}</h2>
                             <ul class="widget__categories--menu">
@@ -189,35 +220,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        {{-- <div class="single__widget price__filter widget__bg">
-                            <h2 class="widget__title h3">Filter By Price</h2>
-                            <form class="price__filter--form" action="#"> 
-                                <div class="price__filter--form__inner mb-15 d-flex align-items-center">
-                                    <div class="price__filter--group">
-                                        <label class="price__filter--label" for="Filter-Price-GTE2">From</label>
-                                        <div class="price__filter--input border-radius-5 d-flex align-items-center">
-                                            <span class="price__filter--currency">$</span>
-                                            <label>
-                                                <input class="price__filter--input__field border-0" name="filter.v.price.gte" type="number" placeholder="0" min="0" max="250.00">
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="price__divider">
-                                        <span>-</span>
-                                    </div>
-                                    <div class="price__filter--group">
-                                        <label class="price__filter--label" for="Filter-Price-LTE2">To</label>
-                                        <div class="price__filter--input border-radius-5 d-flex align-items-center">
-                                            <span class="price__filter--currency">$</span>
-                                            <label>
-                                                <input class="price__filter--input__field border-0" name="filter.v.price.lte" type="number" min="0" placeholder="250.00" max="250.00"> 
-                                            </label>
-                                        </div>	
-                                    </div>
-                                </div>
-                                <button class="price__filter--btn primary__btn" type="submit">Filter</button>
-                            </form>
-                        </div> --}}
+                        
                         
                     </div>
                 </div>
@@ -250,6 +253,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+
+    // price filtering start
+    $('#fromPrice').on('change', function() {
+        $('#min_price').val($(this).val());
+    });
+    $('#toPrice').on('change', function() {
+        $('#max_price').val($(this).val());
+    });
+    $(".price__filter--btn").click(function() { 
+        $('#product_body').html(''); 
+        $('#load_more').val(0);
+        order_ready();
+    });
+    // price filtering end
+
+
     $(document).ready(function() {
         let window_width = $(document).width();
         if(window_width > 991) {
@@ -261,39 +280,39 @@
         order_ready();
     });
 
-    $(".brands").change(function() {
+    $(".brands").change(function() {        
         $('#load_more').val(0);
         $('#lastID').val(1200);
         order_ready();
     });
 
-  function selected_brands() {
-    var brands = new Array();
-    $('.brands:checked').each(function() {
-      brands.push($(this).val());
-    });
-    if(brands.length > 0) {
-      $('#brand_array').val(brands);
+    function selected_brands() {
+        var brands = new Array();
+        $('.brands:checked').each(function() {
+        brands.push($(this).val());
+        });
+        if(brands.length > 0) {
+        $('#brand_array').val(brands);
+        }
+        else {
+        $('#brand_array').val(0);
+        }
     }
-    else {
-      $('#brand_array').val(0);
+
+    function order_ready() {
+        selected_brands();
+        order_confirm();
     }
-  }
 
-  function order_ready() {
-    selected_brands();
-    order_confirm();
-  }
-
-  function load_more() {
-    $('#load_more').val(1);
-    order_ready();
-  }
+    function load_more() {
+        $('#load_more').val(1);
+        order_ready();
+    }
 
 
-  function order_confirm() {
-
+    function order_confirm() {
     // e.preventDefault();
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -308,7 +327,7 @@
                 $('#loading_div').html('<div class="col-md-12" style="width: 100% !important;"><div class="text-center p-10"><h2><b>Loading....</b></h2></div></div>');
             },
             success: function(response){
-                console.log(response);
+                // console.log('response = ', response);
                 if(response.noMorePSts == 'no') {
                     $('#loading_div').html('');
                     $('#lastID').val(response.upLastID);
@@ -328,8 +347,7 @@
                 }
             }
         });
-       
-  }
+    }
 
 </script>
 

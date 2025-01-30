@@ -283,7 +283,7 @@ color:black !important;
                 </div>
                 <p class="header__discount--text"><img class="header__discount--icon__img" 
                     src="{{ asset('assets/img/icon/lamp.png') }}" alt="lamp-img">
-                    High Quality Imported Products
+                    <small>High Quality Products</small>
                 </p>
             </div>
         </div>
