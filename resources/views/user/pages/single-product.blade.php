@@ -216,6 +216,7 @@
                                     {{-- Producr Code --}}
                                     <span class="single-product-bg-info" id="code{{optional($product)->id}}">{{ __('messages.CODE') }}: {{ $product->code }}</span>
                                 </div>
+                                <div class="mb-3"><small>{!! __translate($product->description, $product->bn_description) !!}</small></div>
                             </div>
                         </div>                        
                         
@@ -385,14 +386,15 @@
             <div class="col">
                 <ul class="product__details--tab d-flex mb-30 mt-5" style="border-bottom:1px solid #aba8a8;">
                     <li class="product-details-tab-list active" data-toggle="tab" data-target="#Specification">{{ __('messages.Description') }}</li>
-                    <li class="product-details-tab-list" data-toggle="tab" data-target="#description">{{ __('messages.Processing Time') }}</li>
-                    <li class="product-details-tab-list" data-toggle="tab" data-target="#reviews">{{ __('messages.Product Reviews') }}</li>
+                    {{-- <li class="product-details-tab-list" data-toggle="tab" data-target="#description">{{ __('messages.Processing Time') }}</li> --}}
+                    {{-- <li class="product-details-tab-list" data-toggle="tab" data-target="#reviews">{{ __('messages.Product Reviews') }}</li> --}}
                 </ul>
                 <div class="product__details--tab__inner border-radius-10">
                     <div class="tab_content">
                         <div id="Specification" class="tab_pane active show">
                             <div class="product__tab--content">
-                                {!! __translate($product->feature, $product->bn_feature) !!}
+                                {{-- {!! __translate($product->feature, $product->bn_feature) !!} --}}
+                                {!! __translate($product->description, $product->bn_description) !!}
                             </div> 
                         </div>
                         <div id="description" class="tab_pane">

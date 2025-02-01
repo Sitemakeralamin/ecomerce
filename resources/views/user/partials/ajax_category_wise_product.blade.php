@@ -1,4 +1,43 @@
 @if ($product_with_categories->isNotEmpty())
+  <style>
+    .slick-track{
+        width: 100%;
+    }
+    .slick-list{
+        width: 100%;
+    }
+    .slick-prev:before {
+        display: none!important;
+    }
+    .slick-next:before {
+        display: none!important;
+    }
+    .slick-prev, .slick-next {
+        background-color: #fff;
+        border: none;
+        color: #333;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        z-index: 9;
+    }
+    .slick-prev:hover, .slick-next:hover {
+        background-color: #333;
+        color: #fff;
+    }
+    .slick-prev {
+        left: 0px;
+    }
+    .slick-next {
+        right: 0px;
+    }
+  </style>
     @foreach($product_with_categories as $pwc)
       @php
       $product_with_categories_ids = App\Models\ProductWithCategory::where('category_id',$pwc->category_id)
@@ -67,7 +106,7 @@
                     </div>
 
                       <div class="product__section--inner">
-                        <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-2 mb--n30">
+                        <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-2 mb--n30 responsiveSlider1">
                             @foreach($products as $index => $product)
                                     @include('user.partials.category_wise_product')
                             @endforeach
@@ -80,3 +119,37 @@
       @endif
     @endforeach
 @endif
+
+<script>        
+  $('.responsiveSlider1').slick({
+  infinite: false,
+  speed: 300,
+  slidesToShow: 5,
+  arrows: true,
+  prevArrow: '<button class="slick-prev" type="button"><i class="fa fa-chevron-left"></i></button>',
+  nextArrow: '<button class="slick-next" type="button"><i class="fa fa-chevron-right"></i></button>',
+  responsive: [
+      {
+          breakpoint: 1024,
+          settings: {
+              slidesToShow: 5,
+              slidesToScroll: 1,
+          }
+      },
+      {
+          breakpoint: 600,
+          settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+          }
+      },
+      {
+          breakpoint: 480,
+          settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+          }
+      }
+  ]
+});
+</script>

@@ -49,7 +49,11 @@
         </div>
     </section>    
 </div>
-{{-- Featured Products --}}
+
+{{-- top selling --}}
+<div id="best_selling_products"></div>
+
+{{-- Newarivel products --}}
 <div id="featured_products">
     <section class="product__section section--padding pt-0"  style="padding-bottom: 3rem !important;">
         <div class="container-fluid">
@@ -67,7 +71,8 @@
         </div>
     </section>  
 </div>
-{{-- <div id="best_selling_products"></div> --}}
+
+
 {{-- featured brands section --}}
 <!-- Start testimonial section -->
 @include('user.inc.testimonial')
@@ -82,7 +87,7 @@
         featured_products();
         trending_now();
         category_wise_product();
-        //best_selling_products();
+        best_selling_products();
         //flash_sale_offer();
     });
 </script>

@@ -9,7 +9,7 @@ return [
     'Featured Product' => 'নতুন কালেকশন',
     'Latest News' => 'লেটেস্ট নিউস',
     'Shop More' => 'আরও কিনুন',
-    'Trending Now' => 'ট্রেন্ডিং এখন',
+    'Trending Collection' => 'ট্রেন্ডিং এখন',
     'Support' => 'সাপোর্ট',
     'About Us' => 'আমাদের সম্পর্কে',
     'Help' => 'হেল্প',
